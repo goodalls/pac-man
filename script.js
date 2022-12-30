@@ -73,19 +73,33 @@ document.addEventListener("DOMContentLoaded", () => {
     squares[pacmanCurrnetIndex].classList.remove("pac-man");
     switch (e.keyCode) {
         case 37: //left arrow key
-            if(pacmanCurrnetIndex % width !== 0 && !squares[pacmanCurrnetIndex -1].classList.contains('wall'))
+            if(pacmanCurrnetIndex % width !== 0 && !squares[pacmanCurrnetIndex -1].classList.contains('wall') && !squares[pacmanCurrnetIndex -1].classList.contains('lair'))
             pacmanCurrnetIndex -=1
+          
+            //check for left exit
+            if (pacmanCurrnetIndex -1 === 363) {
+                squares[pacmanCurrnetIndex].classList.add('pac-man')
+                pacmanCurrnetIndex = 391
+                squares[364].classList.remove('pac-man')
+            }
             break;
         case 38: //up arrow key
-            if (pacmanCurrnetIndex - width >= 0) 
+            if (pacmanCurrnetIndex - width >= 0 && !squares[pacmanCurrnetIndex -width].classList.contains('wall') && !squares[pacmanCurrnetIndex -width].classList.contains('lair')) 
             pacmanCurrnetIndex -=width
             break;
         case 39: //right arrow key
-            if (pacmanCurrnetIndex % width < width -1) 
+            if (pacmanCurrnetIndex % width < width -1 && !squares[pacmanCurrnetIndex +1].classList.contains('wall') && !squares[pacmanCurrnetIndex +1].classList.contains('lair')) 
             pacmanCurrnetIndex +=1
+
+             //check for right exit
+             if(pacmanCurrnetIndex +1 === 392) {
+                squares[pacmanCurrnetIndex].classList.add('pac-man')
+                pacmanCurrnetIndex = 364
+                squares[391].classList.remove('pac-man')
+            }
             break;
         case 40: //down arrow key
-            if (pacmanCurrnetIndex + width < width * width) 
+            if (pacmanCurrnetIndex + width < width * width && !squares[pacmanCurrnetIndex +width].classList.contains('wall') && !squares[pacmanCurrnetIndex +width].classList.contains('lair')) 
             pacmanCurrnetIndex +=width
             break;
     }
