@@ -124,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     keepScore();
     pelletEaten();
-    gameOver()
-    //checkForWin()
+    gameOver();
+    Win()
   }
 
   function keepScore() {
@@ -184,13 +184,20 @@ document.addEventListener("DOMContentLoaded", () => {
       if (ghost.isScared) {
         squares[ghost.currentIndex].classList.add("scared-ghost");
       }
-      if (ghost.isScared && squares[ghost.currentIndex].classList.contains('pac-man')) {
-        squares[ghost.currentIndex].classList.remove('ghost', ghost.className, 'scared-ghost' )
-        ghost.currentIndex = ghost.startIndex
-        score += 100
-        squares[ghost.currentIndex.classList.add(ghost.className, 'ghost')]
+      if (
+        ghost.isScared &&
+        squares[ghost.currentIndex].classList.contains("pac-man")
+      ) {
+        squares[ghost.currentIndex].classList.remove(
+          "ghost",
+          ghost.className,
+          "scared-ghost"
+        );
+        ghost.currentIndex = ghost.startIndex;
+        score += 100;
+        squares[ghost.currentIndex.classList.add(ghost.className, "ghost")];
       }
-      gameOver()
+      gameOver();
     }, ghost.speed);
   }
 
@@ -210,28 +217,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function gameOver() {
-    if(squares[pacmanCurrentIndex].classList.contains('ghost') && !squares[pacmanCurrentIndex].classList.contains('scared-ghost')) {
-        ghosts.forEach(ghost => {
-            clearInterval(ghost.timerId)
-        });
-        document.removeEventListener('keyup', movePacman)
-        setTimeout(() => {
-           end()
-        }, 500);
+    if (
+      squares[pacmanCurrentIndex].classList.contains("ghost") &&
+      !squares[pacmanCurrentIndex].classList.contains("scared-ghost")
+    ) {
+      ghosts.forEach((ghost) => {
+        clearInterval(ghost.timerId);
+      });
+      document.removeEventListener("keyup", movePacman);
+      setTimeout(() => {
+        end();
+      }, 500);
     }
   }
-  function end () {
-    alert('Game Over')
-}
+  function end() {
+    alert("Game Over");
+  }
 
   function win() {
     if (score === 274) {
-        ghosts.forEach(ghost => {
-            clearInterval(ghost.timerId)
-        });
+      ghosts.forEach((ghost) => {
+        clearInterval(ghost.timerId);
+      });
     }
-    document.removeEventListener('keyup', movePacman)
-    scoreDisplay.innerHTML('YOU WON')
+    document.removeEventListener("keyup", movePacman);
+    scoreDisplay.innerHTML("YOU WON");
   }
 
   document.addEventListener("keyup", movePacman);
