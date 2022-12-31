@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const scoreDisplay = document.getElementById("score");
   const width = 28; //28*28 = 784 squares
   const squares = [];
-  let score = 0
+  let score = 0;
   const layout = [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
@@ -73,95 +73,166 @@ document.addEventListener("DOMContentLoaded", () => {
   function movePacman(e) {
     squares[pacmanCurrentIndex].classList.remove("pac-man");
     switch (e.keyCode) {
-        case 37: //left arrow key
-            if(pacmanCurrentIndex % width !== 0 && !squares[pacmanCurrentIndex -1].classList.contains('wall') && !squares[pacmanCurrentIndex -1].classList.contains('lair'))
-            pacmanCurrentIndex -=1
-          
-            //check for left exit
-            if (pacmanCurrentIndex -1 === 363) {
-                squares[pacmanCurrentIndex].classList.add('pac-man')
-                pacmanCurrentIndex = 391
-                squares[364].classList.remove('pac-man')
-            }
-            break;
-        case 38: //up arrow key
-            if (pacmanCurrentIndex - width >= 0 && !squares[pacmanCurrentIndex -width].classList.contains('wall') && !squares[pacmanCurrentIndex -width].classList.contains('lair')) 
-            pacmanCurrentIndex -=width
-            break;
-        case 39: //right arrow key
-            if (pacmanCurrentIndex % width < width -1 && !squares[pacmanCurrentIndex +1].classList.contains('wall') && !squares[pacmanCurrentIndex +1].classList.contains('lair')) 
-            pacmanCurrentIndex +=1
+      case 37: //left arrow key
+        if (
+          pacmanCurrentIndex % width !== 0 &&
+          !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
+          !squares[pacmanCurrentIndex - 1].classList.contains("lair")
+        )
+          pacmanCurrentIndex -= 1;
 
-             //check for right exit
-             if(pacmanCurrentIndex +1 === 392) {
-                squares[pacmanCurrentIndex].classList.add('pac-man')
-                pacmanCurrentIndex = 364
-                squares[391].classList.remove('pac-man')
-            }
-            break;
-        case 40: //down arrow key
-            if (pacmanCurrentIndex + width < width * width && !squares[pacmanCurrentIndex +width].classList.contains('wall') && !squares[pacmanCurrentIndex +width].classList.contains('lair')) 
-            pacmanCurrentIndex +=width
-            break;
+        //check for left exit
+        if (pacmanCurrentIndex - 1 === 363) {
+          squares[pacmanCurrentIndex].classList.add("pac-man");
+          pacmanCurrentIndex = 391;
+          squares[364].classList.remove("pac-man");
+        }
+        break;
+      case 38: //up arrow key
+        if (
+          pacmanCurrentIndex - width >= 0 &&
+          !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
+          !squares[pacmanCurrentIndex - width].classList.contains("lair")
+        )
+          pacmanCurrentIndex -= width;
+        break;
+      case 39: //right arrow key
+        if (
+          pacmanCurrentIndex % width < width - 1 &&
+          !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
+          !squares[pacmanCurrentIndex + 1].classList.contains("lair")
+        )
+          pacmanCurrentIndex += 1;
+
+        //check for right exit
+        if (pacmanCurrentIndex + 1 === 392) {
+          squares[pacmanCurrentIndex].classList.add("pac-man");
+          pacmanCurrentIndex = 364;
+          squares[391].classList.remove("pac-man");
+        }
+        break;
+      case 40: //down arrow key
+        if (
+          pacmanCurrentIndex + width < width * width &&
+          !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
+          !squares[pacmanCurrentIndex + width].classList.contains("lair")
+        )
+          pacmanCurrentIndex += width;
+        break;
     }
-    squares[pacmanCurrentIndex].classList.add('pac-man')
+    squares[pacmanCurrentIndex].classList.add("pac-man");
 
-    keepScore()
-    //pelletEaten()
-    //gameOver()
+    keepScore();
+    pelletEaten();
+    gameOver()
     //checkForWin()
-
   }
- 
- 
 
   function keepScore() {
-    if (squares[pacmanCurrentIndex].classList.contains('dot')) {
-        score++
-        scoreDisplay.innerHTML = score
-        squares[pacmanCurrentIndex].classList.remove('dot')
-    } 
+    if (squares[pacmanCurrentIndex].classList.contains("dot")) {
+      score++;
+      scoreDisplay.innerHTML = score;
+      squares[pacmanCurrentIndex].classList.remove("dot");
+    }
   }
 
   class Ghost {
     constructor(className, startIndex, speed) {
-        this.className = className;
-        this.StartIndex = startIndex;
-        this.speed = speed;
-        this.currentIndex = startIndex;
-        this.timerId = NaN;
+      this.className = className;
+      this.StartIndex = startIndex;
+      this.speed = speed;
+      this.currentIndex = startIndex;
+      this.timerId = NaN;
+      this.isScared = false;
     }
   }
   ghosts = [
-    new Ghost('blinky', 348, 250),
-    new Ghost('pinky', 376, 400),
-    new Ghost('inky', 351, 300),
-    new Ghost('clyde', 379, 500)
-  ]
-  ghosts.forEach(ghost => {
-    squares[ghost.currentIndex].classList.add(ghost.className)
-    squares[ghost.currentIndex].classList.add('ghost')
-    moveGhost(ghost)
+    new Ghost("blinky", 348, 250),
+    new Ghost("pinky", 376, 400),
+    new Ghost("inky", 351, 300),
+    new Ghost("clyde", 379, 500),
+  ];
+  ghosts.forEach((ghost) => {
+    squares[ghost.currentIndex].classList.add(ghost.className);
+    squares[ghost.currentIndex].classList.add("ghost");
+    moveGhost(ghost);
   });
-// move ghosts
-// ghosts.forEach(ghost => moveGhost(ghost))
+  // move ghosts
+  // ghosts.forEach(ghost => moveGhost(ghost))
 
-function moveGhost(ghost) {
-    const directions = [-1, +1, width, -width]
-    let direction = directions[Math.floor(Math.random() * directions.length)]
+  function moveGhost(ghost) {
+    const directions = [-1, +1, width, -width];
+    let direction = directions[Math.floor(Math.random() * directions.length)];
 
-    ghost.timerId = setInterval(function() {
-        if (!squares[ghost.currentIndex + direction].classList.contains('wall') && !squares[ghost.currentIndex + direction].classList.contains('ghost')) {
-            //you can go here
-            //remove all ghost related classes
-            squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
-            // change the currentIndex to the new safe square
-            ghost.currentIndex += direction
-            // redraw ghost in new safe square
-            squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
+    ghost.timerId = setInterval(function () {
+      if (
+        !squares[ghost.currentIndex + direction].classList.contains("wall") &&
+        !squares[ghost.currentIndex + direction].classList.contains("ghost")
+      ) {
+        //you can go here
+        //remove all ghost related classes
+        squares[ghost.currentIndex].classList.remove(
+          ghost.className,
+          "ghost",
+          "scared-ghost"
+        );
+        // change the currentIndex to the new safe square
+        ghost.currentIndex += direction;
+        // redraw ghost in new safe square
+        squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+      } else direction = directions[Math.floor(Math.random() * directions.length)];
+      if (ghost.isScared) {
+        squares[ghost.currentIndex].classList.add("scared-ghost");
+      }
+      if (ghost.isScared && squares[ghost.currentIndex].classList.contains('pac-man')) {
+        squares[ghost.currentIndex].classList.remove('ghost', ghost.className, 'scared-ghost' )
+        ghost.currentIndex = ghost.startIndex
+        score += 100
+        squares[ghost.currentIndex.classList.add(ghost.className, 'ghost')]
+      }
+      gameOver()
+    }, ghost.speed);
+  }
 
-        } else direction = directions[Math.floor(Math.random() * directions.length)]
-    }, ghost.speed)
+  function pelletEaten() {
+    if (squares[pacmanCurrentIndex].classList.contains("pellet")) {
+      score += 10;
+      ghosts.forEach((ghost) => (ghost.isScared = true));
+      setTimeout(unScareGhost, 10000);
+      squares[pacmanCurrentIndex].classList.remove("pellet");
+    }
+  }
+
+  function unScareGhost() {
+    ghosts.forEach((ghost) => {
+      ghost.isScared = false;
+    });
+  }
+
+  function gameOver() {
+    if(squares[pacmanCurrentIndex].classList.contains('ghost') && !squares[pacmanCurrentIndex].classList.contains('scared-ghost')) {
+        ghosts.forEach(ghost => {
+            clearInterval(ghost.timerId)
+        });
+        document.removeEventListener('keyup', movePacman)
+        setTimeout(() => {
+           end()
+        }, 500);
+    }
+  }
+  function end () {
+    alert('Game Over')
 }
-  document.addEventListener('keyup', movePacman)
+
+  function win() {
+    if (score === 274) {
+        ghosts.forEach(ghost => {
+            clearInterval(ghost.timerId)
+        });
+    }
+    document.removeEventListener('keyup', movePacman)
+    scoreDisplay.innerHTML('YOU WON')
+  }
+
+  document.addEventListener("keyup", movePacman);
 });

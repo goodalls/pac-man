@@ -53,27 +53,28 @@
 }
 
 .scared-ghost {
-    animation: blink 1s infinite;
+    /* animation: blink 1s infinite; */
     border: 0;
+    background-color: aquamarine;
 }
 
-@keyframes scared-ghost{
+/* @keyframes blink{
     0% {
-      background: red;
+      background-color: aquamarine;
     };
     20% {
-      background: green;
+      background-color: black;
     };
     40% {
-      background: yellow;
+      background-color: aquamarine;
     };
     60% {
-      background: blue;
+      background-color: black;
     };
     80% {
-      background: orange;
+      background-color: aquamarine;
     };
     100% {
-      background: red;
-    };
-}
+      background-color: black;
+    }; 
+}*/
