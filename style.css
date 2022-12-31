@@ -31,3 +31,49 @@
     border-radius: 10px;
     border: 0px;
 }
+
+.blinky {
+    background-color: red;
+    border: 0;
+}
+
+.pinky {
+    background-color: pink;
+    border: 0;
+}
+
+.inky {
+    background-color: cyan;
+    border: 0;
+}
+
+.clyde {
+    background-color: orange;
+    border: 0;
+}
+
+.scared-ghost {
+    animation: blink 1s infinite;
+    border: 0;
+}
+
+@keyframes scared-ghost{
+    0% {
+      background: red;
+    };
+    20% {
+      background: green;
+    };
+    40% {
+      background: yellow;
+    };
+    60% {
+      background: blue;
+    };
+    80% {
+      background: orange;
+    };
+    100% {
+      background: red;
+    };
+}

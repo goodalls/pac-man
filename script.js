@@ -113,7 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
  
-  document.addEventListener('keyup', movePacman)
+ 
+
   function keepScore() {
     if (squares[pacmanCurrentIndex].classList.contains('dot')) {
         score++
@@ -121,4 +122,46 @@ document.addEventListener("DOMContentLoaded", () => {
         squares[pacmanCurrentIndex].classList.remove('dot')
     } 
   }
+
+  class Ghost {
+    constructor(className, startIndex, speed) {
+        this.className = className;
+        this.StartIndex = startIndex;
+        this.speed = speed;
+        this.currentIndex = startIndex;
+        this.timerId = NaN;
+    }
+  }
+  ghosts = [
+    new Ghost('blinky', 348, 250),
+    new Ghost('pinky', 376, 400),
+    new Ghost('inky', 351, 300),
+    new Ghost('clyde', 379, 500)
+  ]
+  ghosts.forEach(ghost => {
+    squares[ghost.currentIndex].classList.add(ghost.className)
+    squares[ghost.currentIndex].classList.add('ghost')
+    moveGhost(ghost)
+  });
+// move ghosts
+// ghosts.forEach(ghost => moveGhost(ghost))
+
+function moveGhost(ghost) {
+    const directions = [-1, +1, width, -width]
+    let direction = directions[Math.floor(Math.random() * directions.length)]
+
+    ghost.timerId = setInterval(function() {
+        if (!squares[ghost.currentIndex + direction].classList.contains('wall') && !squares[ghost.currentIndex + direction].classList.contains('ghost')) {
+            //you can go here
+            //remove all ghost related classes
+            squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
+            // change the currentIndex to the new safe square
+            ghost.currentIndex += direction
+            // redraw ghost in new safe square
+            squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
+
+        } else direction = directions[Math.floor(Math.random() * directions.length)]
+    }, ghost.speed)
+}
+  document.addEventListener('keyup', movePacman)
 });
