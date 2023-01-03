@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     keepScore();
     pelletEaten();
     gameOver();
-    Win()
+    Win();
   }
 
   function keepScore() {
@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.currentIndex = startIndex;
       this.timerId = NaN;
       this.isScared = false;
+      this.chase = true;
     }
   }
   ghosts = [
@@ -169,13 +170,8 @@ document.addEventListener("DOMContentLoaded", () => {
         !squares[ghost.currentIndex + direction].classList.contains("wall") &&
         !squares[ghost.currentIndex + direction].classList.contains("ghost")
       ) {
-        //you can go here
-        //remove all ghost related classes
-        squares[ghost.currentIndex].classList.remove(
-          ghost.className,
-          "ghost",
-          "scared-ghost"
-        );
+        //remove all classes in squares
+        squares[ghost.currentIndex].classList.remove(ghost.className, "ghost", "scared-ghost");
         // change the currentIndex to the new safe square
         ghost.currentIndex += direction;
         // redraw ghost in new safe square
@@ -196,6 +192,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ghost.currentIndex = ghost.startIndex;
         score += 100;
         squares[ghost.currentIndex.classList.add(ghost.className, "ghost")];
+      }
+      if (ghost.chase = true) {
+        //what happens when the ghost.chase = true
+        let direction = directions[Math.floor((squares[pacmanCurrentIndex] - squares[ghost.currentIndex]) >= squares[pacmanCurrentIndex] * directions.length)];
       }
       gameOver();
     }, ghost.speed);
