@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function win() {
-    if (score === 274) {
+    if (score >= 274) {
       ghosts.forEach((ghost) => {
         clearInterval(ghost.timerId);
       });
