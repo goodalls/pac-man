@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
   class Ghost {
     constructor(className, startIndex, speed) {
       this.className = className;
-      this.StartIndex = startIndex;
+      this.startIndex = startIndex;
       this.speed = speed;
       this.currentIndex = startIndex;
       this.timerId = NaN;
@@ -180,17 +180,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (ghost.isScared) {
         squares[ghost.currentIndex].classList.add("scared-ghost");
       }
-      if (
-        ghost.isScared &&
-        squares[ghost.currentIndex].classList.contains("pac-man")
-      ) {
+      if (ghost.isScared && squares[ghost.currentIndex].classList.contains("pac-man")) {
         squares[ghost.currentIndex].classList.remove(
           "ghost",
           ghost.className,
           "scared-ghost"
         );
-        ghost.currentIndex = ghost.startIndex;
         score += 100;
+        ghost.currentIndex = ghost.startIndex;
         squares[ghost.currentIndex.classList.add(ghost.className, "ghost")];
       }
       if (ghost.chase = true) {
