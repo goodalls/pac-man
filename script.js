@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     keepScore();
     pelletEaten();
     gameOver();
-    Win();
+    win();
   }
 
   function keepScore() {
@@ -195,7 +195,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (ghost.chase = true) {
         //what happens when the ghost.chase = true
-        let direction = directions[Math.floor((squares[pacmanCurrentIndex] - squares[ghost.currentIndex]) >= squares[pacmanCurrentIndex] * directions.length)];
+
+
       }
       gameOver();
     }, ghost.speed);
@@ -239,9 +240,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ghosts.forEach((ghost) => {
         clearInterval(ghost.timerId);
       });
-    }
+    
     document.removeEventListener("keyup", movePacman);
-    scoreDisplay.innerHTML("YOU WON");
+    scoreDisplay.innerHTML = 'YOU ARE A WINNER';
+    }
   }
 
   document.addEventListener("keyup", movePacman);

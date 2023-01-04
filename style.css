@@ -4,6 +4,7 @@
   width: 560px;
   height: 560px;
   border: solid black;
+  background-color: black;
 }
 
 .grid div {
@@ -12,9 +13,10 @@
 }
 
 .dot {
-  background-color: green;
-  border: 5px solid white;
+  background-color: white;
+  border: 5px solid black;
   box-sizing: border-box;
+  border-radius: 10px;
 }
 
 .wall {
@@ -47,16 +49,20 @@
 } */
 
 .pac-man {
-  background-color: yellow;
-  border-radius: 10px;
+  /* background-color: yellow; */
+  /* border-radius: 10px; */
   border: 0px;
+  background-image: url(images/pac-man.png);
+  background-position: -20px 0px;
+  display: inline-block;
+  object-fit: none;
 }
 
 .blinky {
   background-color: red;
   border: 0;
-  background-image: url(images/Ghosts.jpg);
-  background-position: 0 0;
+  background-image: url(images/pac-man.png);
+  background-position: -23px -80px;
   display: inline-block;
   object-fit: none;
 }
@@ -64,8 +70,8 @@
 .pinky {
   background-color: pink;
   border: 0;
-  background-image: url(images/Ghosts.jpg);
-  background-position: 20px 0;
+  background-image: url(images/pac-man.png);
+  background-position: -23px -100px;
   display: inline-block;
   object-fit: none;
 }
@@ -73,8 +79,8 @@
 .inky {
   background-color: cyan;
   border: 0;
-  background-image: url(images/Ghosts.jpg);
-  background-position: 20px 20px;
+  background-image: url(images/pac-man.png);
+  background-position: -23px -120px;
   display: inline-block;
   object-fit: none;
 }
@@ -82,35 +88,28 @@
 .clyde {
   background-color: orange;
   border: 0;
-  background-image: url(images/Ghosts.jpg);
-  background-position: -0px -20px;
+  background-image: url(images/pac-man.png);
+  background-position: -23px -140px;
   display: inline-block;
   object-fit: none;
 }
 
 .scared-ghost {
-  /* animation: blink 1s infinite; */
-  border: 0;
+  animation: blink .5s infinite;
   background-color: aquamarine;
+  background-image: url(images/pac-man.png);
+  background-position: -200px -80px;
+  display: inline-block;
+  object-fit: none;
 }
 
-/* @keyframes blink{
-    0% {
-      background-color: aquamarine;
-    };
-    20% {
-      background-color: black;
-    };
-    40% {
-      background-color: aquamarine;
-    };
-    60% {
-      background-color: black;
-    };
-    80% {
-      background-color: aquamarine;
-    };
-    100% {
-      background-color: black;
-    }; 
-}*/
+@keyframes blink {
+  0%,
+  49% {
+    background-position: -180px -80px;
+  }
+  50%,
+  100% {
+    background-position: -200px -80px;
+  }
+}
