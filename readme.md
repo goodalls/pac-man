@@ -28,6 +28,8 @@ I followed this tutorial on youtube to code this. I highly recomend!  [here](htt
 
 * adding styling to the ghosts and board to make look better and see characters in game. thinking of using emojis right now but who knows!
 
+* 
+
 
 
 ### MIT Licence
