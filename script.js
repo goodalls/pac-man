@@ -238,15 +238,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   function win() {
-    console.log(squares);
-    console.log(squares.find(( name, i, arr ) => name == 'div.dot'));
-    if (score >= 2 && squares.find(( name, i, arr ) => name == ("<div class='dot'></div>"))) {
+    if (!squares.some((e)=> e.className === 'dot')) {
       ghosts.forEach((ghost) => {
         clearInterval(ghost.timerId);
       });
     
     document.removeEventListener("keyup", movePacman);
-    scoreDisplay.innerHTML = 'YOU ARE A WINNER';
+    scoreDisplay.innerHTML = 'WINNER';
     }
   }
 
