@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pac-Man</title>
-    <!-- <link rel="stylesheet" href="reset.css"> -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <script src="script.js"></script>
-</head>
-<body>
-    <div class="grid">
-
-    </div>
-
-    <h3>Score:<span id="score">0</span></h3>
-</body>
+  </head>
+  <body>
+    <header>
+      <h1>PacMan</h1>
+    </header>
+    <game>
+      <div class="grid"></div>
+    </game>
+    <aside>
+      <div class="score">
+        <h3>Score:<span id="score">0</span></h3>
+      </div>
+      <div class="lives">
+        <button type="reset" id="reset">Reset</button>
+        <button id="start">Start</button>
+      </div>
+      <div class="level">
+        
+      </div>
+      <div class="highScore">
+        <h3>High Score:<span id="hiScore">0</span></h3>
+      </div>
+    </aside>
+    <footer>Jeff Goodall &copy;2023</footer>
+  </body>
 </html>

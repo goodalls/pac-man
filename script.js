@@ -233,7 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   function end() {
-    alert("Game Over");
+    document.getElementById('hiScore').innerHTML = score
+    document.removeEventListener("keyup", movePacman);
   }
 
 
@@ -242,8 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ghosts.forEach((ghost) => {
         clearInterval(ghost.timerId);
       });
-    
-    document.removeEventListener("keyup", movePacman);
     scoreDisplay.innerHTML = 'WINNER';
     }
   }

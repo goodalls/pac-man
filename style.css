@@ -1,3 +1,35 @@
+body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto;
+  gap: 5px;
+  grid-template-areas:
+    "header header"
+    "game aside"
+    "footer footer";
+}
+
+header {
+    grid-area: header;
+    text-align: center;
+}
+
+h1 {
+    color: yellow;
+}
+
+game {
+    grid-area: game;
+}
+
+aside {
+    grid-area: aside;
+}
+
+footer {
+    grid-area: footer;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -103,3 +135,4 @@
     background-position: -200px -80px;
   }
 }
+
