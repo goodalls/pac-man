@@ -190,11 +190,15 @@ document.addEventListener("DOMContentLoaded", () => {
         ghost.currentIndex = ghost.startIndex;
         squares[ghost.currentIndex.classList.add(ghost.className, "ghost")];
       }
-      if (ghost.chase = true) {
-        //what happens when the ghost.chase = true
+    //   if (ghost.chase = true) {
+    //     //what happens when the ghost.chase = true
+    //     if (squares[ghost.currentIndex] - squares[pacmanCurrentIndex] >= squares[pacmanCurrentIndex]) {
+    //         direction = -1 + directions[Math.floor(Math.random() * directions.length)];
+    //     } else if (squares[ghost.currentIndex] - squares[pacmanCurrentIndex] <= squares[pacmanCurrentIndex]) {
+    //         direction = +1 + directions[Math.floor(Math.random() * directions.length)];
+    //     } else direction = directions[Math.floor(Math.random() * directions.length)];
 
-
-      }
+    //   }
       gameOver();
     }, ghost.speed);
   }
@@ -232,8 +236,11 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("Game Over");
   }
 
+
   function win() {
-    if (score >= 274) {
+    console.log(squares);
+    console.log(squares.find(( name, i, arr ) => name == 'div.dot'));
+    if (score >= 2 && squares.find(( name, i, arr ) => name == ("<div class='dot'></div>"))) {
       ghosts.forEach((ghost) => {
         clearInterval(ghost.timerId);
       });
