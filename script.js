@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function win() {
-    if (!squares.some((e) => e.className === "dot")) {
+    if (!squares.some((e) => e.className === "dot" && !squares.some((e) => e.className === "pellet"))) {
       ghosts.forEach((ghost) => {
         clearInterval(ghost.timerId);
       });
@@ -269,6 +269,8 @@ document.addEventListener("DOMContentLoaded", () => {
     squares[pacmanCurrentIndex].classList.add("pac-man");
     createBoard();
     score = 0;
+    scoreDisplay.innerHTML = score;
+
     ghosts.forEach((ghost) => {
       squares[ghost.currentIndex].classList.remove(ghost.className);
       squares[ghost.currentIndex].classList.remove("ghost");
@@ -280,6 +282,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   console.log(window.innerWidth, window.innerHeight);
+
+
+
   document.getElementById("reset").addEventListener("click", reset);
   document.getElementById("start").addEventListener("click", start);
 });
