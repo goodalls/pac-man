@@ -11,6 +11,7 @@ I followed this tutorial on youtube to code this. I highly recomend!  [here](htt
 * classList
 * constructor
 * createElement()
+* CSS Grid
 * forEach()
 * getElementById()
 * if else statements
@@ -22,7 +23,6 @@ I followed this tutorial on youtube to code this. I highly recomend!  [here](htt
 * setTimeout()
 * some()
 * switch
-* CSS Grid
 
 ### Next steps:
 * My next goal is to make a copy of this game and apply logic to the ghost moves. At the moment they are choosing a direction to go in at random. I want to apply logic that makes them move closer to wherever Pac-man is.

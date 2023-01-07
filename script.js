@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.chase = true;
     }
   }
-  ghosts = [
+  const ghosts = [
     new Ghost("blinky", 348, 250),
     new Ghost("pinky", 376, 400),
     new Ghost("inky", 351, 300),
@@ -156,7 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ghosts.forEach((ghost) => {
     squares[ghost.currentIndex].classList.add(ghost.className);
     squares[ghost.currentIndex].classList.add("ghost");
-    moveGhost(ghost);
   });
   // move ghosts
   // ghosts.forEach(ghost => moveGhost(ghost))
@@ -171,7 +170,11 @@ document.addEventListener("DOMContentLoaded", () => {
         !squares[ghost.currentIndex + direction].classList.contains("ghost")
       ) {
         //remove all classes in squares
-        squares[ghost.currentIndex].classList.remove(ghost.className, "ghost", "scared-ghost");
+        squares[ghost.currentIndex].classList.remove(
+          ghost.className,
+          "ghost",
+          "scared-ghost"
+        );
         // change the currentIndex to the new safe square
         ghost.currentIndex += direction;
         // redraw ghost in new safe square
@@ -180,7 +183,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (ghost.isScared) {
         squares[ghost.currentIndex].classList.add("scared-ghost");
       }
-      if (ghost.isScared && squares[ghost.currentIndex].classList.contains("pac-man")) {
+      if (
+        ghost.isScared &&
+        squares[ghost.currentIndex].classList.contains("pac-man")
+      ) {
         squares[ghost.currentIndex].classList.remove(
           "ghost",
           ghost.className,
@@ -190,15 +196,15 @@ document.addEventListener("DOMContentLoaded", () => {
         ghost.currentIndex = ghost.startIndex;
         squares[ghost.currentIndex.classList.add(ghost.className, "ghost")];
       }
-    //   if (ghost.chase = true) {
-    //     //what happens when the ghost.chase = true
-    //     if (squares[ghost.currentIndex] - squares[pacmanCurrentIndex] >= squares[pacmanCurrentIndex]) {
-    //         direction = -1 + directions[Math.floor(Math.random() * directions.length)];
-    //     } else if (squares[ghost.currentIndex] - squares[pacmanCurrentIndex] <= squares[pacmanCurrentIndex]) {
-    //         direction = +1 + directions[Math.floor(Math.random() * directions.length)];
-    //     } else direction = directions[Math.floor(Math.random() * directions.length)];
+      //   if (ghost.chase = true) {
+      //     //what happens when the ghost.chase = true
+      //     if (squares[ghost.currentIndex] - squares[pacmanCurrentIndex] >= squares[pacmanCurrentIndex]) {
+      //         direction = -1 + directions[Math.floor(Math.random() * directions.length)];
+      //     } else if (squares[ghost.currentIndex] - squares[pacmanCurrentIndex] <= squares[pacmanCurrentIndex]) {
+      //         direction = +1 + directions[Math.floor(Math.random() * directions.length)];
+      //     } else direction = directions[Math.floor(Math.random() * directions.length)];
 
-    //   }
+      //   }
       gameOver();
     }, ghost.speed);
   }
@@ -233,19 +239,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   function end() {
-    document.getElementById('hiScore').innerHTML = score
+    document.getElementById("hiScore").innerHTML = score;
     document.removeEventListener("keyup", movePacman);
   }
 
-
   function win() {
-    if (!squares.some((e)=> e.className === 'dot')) {
+    if (!squares.some((e) => e.className === "dot")) {
       ghosts.forEach((ghost) => {
         clearInterval(ghost.timerId);
       });
-    scoreDisplay.innerHTML = 'WINNER';
+      scoreDisplay.innerHTML = "WINNER";
     }
   }
 
-  document.addEventListener("keyup", movePacman);
+  function start() {
+    console.log("start function");
+    ghosts.forEach((ghost) => {
+      squares[ghost.currentIndex].classList.add(ghost.className);
+      squares[ghost.currentIndex].classList.add("ghost");
+      document.addEventListener("keyup", movePacman);
+      moveGhost(ghost);
+    });
+  }
+
+  function reset() {
+    console.log("reset function");
+    squares[pacmanCurrentIndex].classList.remove("pac-man");
+    pacmanCurrentIndex = 490;
+    squares[pacmanCurrentIndex].classList.add("pac-man");
+    createBoard();
+    score = 0;
+    ghosts.forEach((ghost) => {
+      squares[ghost.currentIndex].classList.remove(ghost.className);
+      squares[ghost.currentIndex].classList.remove("ghost");
+      pacmanCurrentIndex = 490;
+      ghost.currentIndex = ghost.startIndex;
+      squares[ghost.currentIndex].classList.add(ghost.className);
+      squares[ghost.currentIndex].classList.add("ghost");
+    });
+  }
+
+  console.log(window.innerWidth, window.innerHeight);
+  document.getElementById("reset").addEventListener("click", reset);
+  document.getElementById("start").addEventListener("click", start);
 });
