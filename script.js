@@ -253,7 +253,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function start() {
-    console.log("start function");
     ghosts.forEach((ghost) => {
       squares[ghost.currentIndex].classList.add(ghost.className);
       squares[ghost.currentIndex].classList.add("ghost");
@@ -263,7 +262,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function reset() {
-    console.log("reset function");
     squares[pacmanCurrentIndex].classList.remove("pac-man");
     pacmanCurrentIndex = 490;
     squares[pacmanCurrentIndex].classList.add("pac-man");
