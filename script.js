@@ -129,8 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function keepScore() {
+    let mySound = new Audio("sound/pacman-move.mp3");
     if (squares[pacmanCurrentIndex].classList.contains("dot")) {
       score++;
+      mySound.play();
       scoreDisplay.innerHTML = score;
       squares[pacmanCurrentIndex].classList.remove("dot");
     }
@@ -239,6 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   function end() {
+    let mySound = new Audio("sound/pacman-dead.mp3");
+    mySound.play();
     document.getElementById("hiScore").innerHTML = score;
     document.removeEventListener("keyup", movePacman);
   }
@@ -256,6 +260,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keyup", movePacman);
     ghosts.forEach((ghost) => {
       moveGhost(ghost);
+      let mySound = new Audio("sound/opening.mp3");
+      mySound.play();
     });
   }
   console.log(window.innerWidth, window.innerHeight);
