@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".grid");
   const scoreDisplay = document.getElementById("score");
   const width = 28; //28*28 = 784 squares
-  const squares = [];
+  let squares = [];
   let score = 0;
   const layout = [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function win() {
-    if (!squares.some((e) => e.className === "dot" && !squares.some((e) => e.className === "pellet"))) {
+    if (!squares.some((e) => e.className === "dot")) {
       ghosts.forEach((ghost) => {
         clearInterval(ghost.timerId);
       });
@@ -253,36 +253,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function start() {
+    document.addEventListener("keyup", movePacman);
     ghosts.forEach((ghost) => {
-      squares[ghost.currentIndex].classList.add(ghost.className);
-      squares[ghost.currentIndex].classList.add("ghost");
-      document.addEventListener("keyup", movePacman);
       moveGhost(ghost);
     });
   }
-
-  function reset() {
-    squares[pacmanCurrentIndex].classList.remove("pac-man");
-    pacmanCurrentIndex = 490;
-    squares[pacmanCurrentIndex].classList.add("pac-man");
-    createBoard();
-    score = 0;
-    scoreDisplay.innerHTML = score;
-
-    ghosts.forEach((ghost) => {
-      squares[ghost.currentIndex].classList.remove(ghost.className);
-      squares[ghost.currentIndex].classList.remove("ghost");
-      pacmanCurrentIndex = 490;
-      ghost.currentIndex = ghost.startIndex;
-      squares[ghost.currentIndex].classList.add(ghost.className);
-      squares[ghost.currentIndex].classList.add("ghost");
-    });
-  }
-
   console.log(window.innerWidth, window.innerHeight);
-
-
-
-  document.getElementById("reset").addEventListener("click", reset);
   document.getElementById("start").addEventListener("click", start);
 });
