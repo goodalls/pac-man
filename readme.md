@@ -8,14 +8,14 @@ I followed this tutorial on youtube to code this. I highly recomend!  [here](htt
 * addEventListener()
 * appendChild()
 * Class
-* classList
-* constructor
+* .classList
+* constructor()
 * createElement()
 * CSS Grid
 * forEach()
 * getElementById()
 * if else statements
-* keyCode
+* Event keyCode
 * localStorage
 * push()
 * querySelector()
@@ -23,13 +23,13 @@ I followed this tutorial on youtube to code this. I highly recomend!  [here](htt
 * setInterval()
 * setTimeout()
 * some()
-* start button
-* switch
+* start & Reset buttons
+* switch()
 
 ### Next features to add:
 * Apply logic to the ghosts.
 * style board to fit screen. 
-* add pac-man death animation. 
+* add pac-man death animation existing sprite. 
 * add direction ghosts and pac-man using existing sprite.
 
 ### MIT License
