@@ -1,10 +1,10 @@
-# pac-man By [Jeffrey Goodall][linkedIN](https://www.linkedin.com/in/jeffgoodall/) 
+# Pac-Man By [Jeffrey Goodall][linkedIN](https://www.linkedin.com/in/jeffgoodall/) 
 Vanilla javaScript Game with HTML and CSS
 
 I followed this tutorial on youtube to code this. I highly recomend!  [here](https://www.youtube.com/channel/UC5DNytAJ6_FISueUfzZCVsw) 
 
 
-### Inbuilt JavaScript functions I have used: 
+### JavaScript functions used: 
 * addEventListener()
 * appendChild()
 * Class
@@ -33,7 +33,6 @@ I followed this tutorial on youtube to code this. I highly recomend!  [here](htt
 * add direction ghosts and pac-man using existing sprite.
 
 ### MIT License
-
 Copyright (c) [2023] [Jeffrey Goodall][linkedIN](https://www.linkedin.com/in/jeffgoodall/) 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
