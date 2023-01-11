@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const width = 28; //28*28 = 784 squares
   let squares = [];
   let score = 0;
-  const layout = [
+   const layout = [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1,
@@ -65,6 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   createBoard();
+
+  function storageCheck() {
+    if (localStorage.length > 0) {
+      let storage = localStorage.getItem('highScore')
+      document.getElementById('hiScore').innerHTML = storage;
+    }
+  }
+  storageCheck();
 
   let pacmanCurrentIndex = 490;
   squares[pacmanCurrentIndex].classList.add("pac-man");
@@ -253,10 +261,11 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(ghost.timerId);
       });
       scoreDisplay.innerHTML = "WINNER";
+      document.removeEventListener("keyup", movePacman);
     }
   }
 
-  function start() {
+  function start(e) {
     document.addEventListener("keyup", movePacman);
     ghosts.forEach((ghost) => {
       moveGhost(ghost);
@@ -264,6 +273,14 @@ document.addEventListener("DOMContentLoaded", () => {
       mySound.play();
     });
   }
-  console.log(window.innerWidth, window.innerHeight);
+
+  function refresh(e) {
+    if(score >= 1) {
+      localStorage.setItem("highScore", score) ;
+    } 
+    location.reload();
+    return false;
+  }
   document.getElementById("start").addEventListener("click", start);
+  document.getElementById("refresh").addEventListener("click", refresh);
 });
